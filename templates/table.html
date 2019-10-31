@@ -1,11 +1,27 @@
 <table class="table table-striped">
   <tbody>
-    {% for key in ["name", "ra", "dec", "notes"] %}
+  	<tr>
+      <td><b>ASIN</b></td>
+      <td>{{asin}}</td>
+ 	<tr>
+      <td><b>Title</b></td>
+      <td>{{data['title']|e}}</td>
+  	
+  	<!-- <tr>
+      <td><b>imageUrl</b></td>
+      <td>{{data['imUrl']|e}}</td>
+    </tr> -->
+    {% for key in ["texture", "fabric","shape", "part","style"] %}
     <tr>
       <td><b>{{ key|e|capitalize }}</b></td>
-      <td>{{ data[key]|e }}</td>
+      <td>
+      {% for word in data['tags'][loop.index]%}
+      	"{{ word|e }}",
+      {% endfor %}
+      </td>
     </tr>
     {% endfor %}
+
   </tbody>
 </table>
 

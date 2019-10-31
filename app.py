@@ -2,6 +2,8 @@ import csv
 from flask import Flask, render_template, request, redirect, url_for
 import requests
 from pager import Pager
+import json
+import pickle
 
 
 def read_table(url):
@@ -11,12 +13,22 @@ def read_table(url):
         return [row for row in csv.DictReader(f.readlines())]
 
 
-APPNAME = "PrettyGalaxies"
-STATIC_FOLDER = 'example'
-TABLE_FILE = "example/fakecatalog.csv"
+APPNAME = "FashionIQ-Image-Viewer"
+STATIC_FOLDER = ''
+# TABLE_FILE = "example/fakecatalog.csv"
+diction = open("dress.test.json.pt", 'rb')
+diction = pickle.load(diction)
 
-table = read_table(TABLE_FILE)
-pager = Pager(len(table))
+n = len(diction)
+asin_array = []
+
+for asin in diction:
+    asin_array.append(asin)
+
+
+
+# table = read_table(TABLE_FILE)
+pager = Pager(n)
 
 
 app = Flask(__name__, static_folder=STATIC_FOLDER)
@@ -36,11 +48,23 @@ def image_view(ind=None):
         return render_template("404.html"), 404
     else:
         pager.current = ind
+        print(diction[asin_array[ind]])
+        u1 = diction[asin_array[ind]]['imUrl']
+        u2 = None
+        # if len(diction[asin_array[ind]]['imUrl']) > 0:
+        #     u1 = diction[asin_array[ind]]['imUrl'][0] 
+        # if len(diction[asin_array[ind]]['imUrl']) > 1:
+        #     u2 = diction[asin_array[ind]]['imUrl'][1]
+        # print()
         return render_template(
             'imageview.html',
             index=ind,
             pager=pager,
-            data=table[ind])
+            data=diction[asin_array[ind]],
+            url1=u1,
+            asin=asin_array[ind]
+            # url2=u2
+            )
 
 
 @app.route('/goto', methods=['POST', 'GET'])    
