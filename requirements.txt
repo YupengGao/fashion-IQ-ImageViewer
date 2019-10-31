@@ -2,7 +2,7 @@
 #
 
 flask==0.10.1
-gunicorn==19.1.0
+gunicorn==19.5.0
 jinja2==2.7.3
 werkzeug==0.9.6
 requests==2.5.0
