@@ -20,6 +20,7 @@ diction = open("dress.test.json.pt", 'rb')
 diction = pickle.load(diction)
 
 n = len(diction)
+print('the length of diction is: ',)
 asin_array = []
 
 for asin in diction:
@@ -73,4 +74,4 @@ def goto():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='169.46.81.178')
