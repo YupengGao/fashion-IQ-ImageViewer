@@ -4,5 +4,5 @@
 flask==0.10.1
 gunicorn==19.1.0
 jinja2==2.7.3
-werkzeug==0.9.6
+werkzeug==0.15.3
 requests==2.5.0
